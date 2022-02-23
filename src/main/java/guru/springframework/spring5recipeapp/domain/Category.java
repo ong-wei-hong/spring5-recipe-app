@@ -4,19 +4,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"recipe"})
-public class Notes {
+@EqualsAndHashCode(exclude = {"recipes"})
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Recipe recipe;
+    private String description;
 
-    @Lob
-    private String recipeNotes;
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipes;
 }
